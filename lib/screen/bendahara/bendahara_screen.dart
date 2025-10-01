@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:himpunan_app/core/constant/app_colors.dart';
 import 'package:himpunan_app/core/models/user_model.dart';
+import 'package:himpunan_app/screen/bendahara/tabs/kalender_screen.dart';
+import 'package:himpunan_app/screen/bendahara/tabs/keuangan_screen.dart';
+import 'package:himpunan_app/screen/bendahara/tabs/proker_screen.dart';
 import 'package:himpunan_app/screen/main-tabs/auth_screen.dart';
 
 class BendaharaScreen extends StatefulWidget {
@@ -14,44 +18,30 @@ class BendaharaScreen extends StatefulWidget {
 class _BendaharaScreenState extends State<BendaharaScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Bendahara Screen"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AuthScreen()),
-                  (route) => false,
-                );
-              });
-            },
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          elevation: 0,
+          backgroundColor: AppColors.white,
+          toolbarHeight: 0,
+          bottom: const TabBar(
+            labelColor: Colors.blue,
+            unselectedLabelColor: Colors.grey,
+            indicatorColor: Colors.blue,
+            tabs: [
+              Tab(text: "Keuangan", icon: Icon(Icons.money)),
+              Tab(text: "Proker", icon: Icon(Icons.list)),
+              Tab(text: "Kalender", icon: Icon(Icons.calendar_month)),
+            ],
           ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        ),
+        body: TabBarView(
           children: [
-            Text(
-              "Halo, ${widget.user?.username ?? 'Guest'}",
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AuthScreen()),
-                  (route) => false,
-                );
-              },
-              icon: const Icon(Icons.logout),
-              label: const Text("Logout"),
-            ),
+            KeuanganScreen(user: widget.user),
+            ProkerScreen(user: widget.user),
+            KalenderScreen(user: widget.user),
           ],
         ),
       ),

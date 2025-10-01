@@ -46,6 +46,7 @@ dev_dependencies:
   connectivity_plus: ^5.0.2
   persistent_bottom_nav_bar : ^6.2.1
   flutter_svg: ^2.2.1
+  table_calendar: ^3.1.2
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
