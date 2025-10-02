@@ -4,8 +4,10 @@ import 'package:himpunan_app/bloc/auth/auth_cubit.dart';
 import 'package:himpunan_app/bloc/auth/auth_state.dart';
 import 'package:himpunan_app/core/constant/app_colors.dart';
 import 'package:himpunan_app/screen/bendahara/bendahara_screen.dart';
+import 'package:himpunan_app/screen/internal/internal_screen.dart';
 import 'package:himpunan_app/screen/ketuawakil/ketuawakil_screen.dart';
 import 'package:himpunan_app/screen/main-tabs/beranda_screen.dart';
+import 'package:himpunan_app/screen/sekre/sekre_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -81,6 +83,20 @@ class _LoginScreenState extends State<LoginScreen> {
               context,
               MaterialPageRoute(
                 builder: (_) => BendaharaScreen(user: state.user),
+              ),
+            );
+          } else if (state.user.email == "sekre@himpunan.com" &&
+              state.user.password == "sekre123") {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => SekreScreen(user: state.user)),
+            );
+          } else if (state.user.email == "internal@himpunan.com" &&
+              state.user.password == "internal123") {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => InternalScreen(user: state.user),
               ),
             );
           } else {
